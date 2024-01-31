@@ -1,6 +1,6 @@
 import list_adt as listadt
 
-def create_alien(): -> dict("messages", any):
+def create_alien() -> dict("messages", any):
     """
     Creates an 'alien' dictionary with a list to store messages.
     You can add other attributes if required
