@@ -103,7 +103,7 @@ def peek_min_priority(priority_queue: dict):
     pass
 
 
-def CallSimulator(callQueue, agentQueue):
+def CallSimulator(callQueue, agentQueue) -> dict:
     """
     Description: Simulates a call center scenario where calls are processed by agents based on their availability.
     Type: Function
@@ -129,7 +129,7 @@ def CallSimulator(callQueue, agentQueue):
     return callLog
 
 
-def main(filename):
+def main(filename) -> list:
     """
     Description: Main function to read input data from a file, initialize agent and call queues, simulate call processing using CallSimulator, and return the call log data.
     Parameters: filename - the name of the file containing input data.
