@@ -3,7 +3,7 @@ from alien import main
 
 alien_testcases = [
     ("Inputs/alien01.txt","Hello World"),
-    ("Inputs/alien02.txt","Hi Hello"),
+    ("Inputs/alien02.txt","Hi, Hello"),
 ]
 
 @pytest.mark.parametrize("filename, output",alien_testcases)
