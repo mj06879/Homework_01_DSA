@@ -28,7 +28,7 @@ def insertion_sort(arr: list[int]) -> None:
     pass
 
 
-def partition_and_prevail(arr: list[list[int]]) -> None:
+def partition_and_prevail(arr: list[int]) -> None:
     """
     A void function that takes the array to be sorted as an argument
     and applies the “Partition and Prevail” algorithm to sort the valid
@@ -39,9 +39,9 @@ def partition_and_prevail(arr: list[list[int]]) -> None:
     pass
 
 
-def main(filename) -> list[list[int]]:
+def main(filename) -> list[int]:
     """
     - Take input from the given filename one line at a time
-    - Apply partition_and_prevail sorting algorithm to get the sorted arrays and returns the output as a two dimensional array.
+    - Apply partition_and_prevail sorting algorithm to get the sorted arrays and returns the output as a one dimensional array.
     """
     pass
