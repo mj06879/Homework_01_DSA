@@ -1,6 +1,7 @@
 import list_adt as listadt
+import random 
 
-def create_alien() -> dict("messages", any):
+def create_alien() -> dict:
     """
     Creates an 'alien' dictionary with a list to store messages.
     You can add other attributes if required
@@ -11,10 +12,14 @@ def create_alien() -> dict("messages", any):
         'messages': listadt.create_list(100)    # List to store messages with a maximum capacity of 100
     }
     """
-    messages = {"messages":listadt.create_list(100)}
+    messages = {'messages':listadt.create_list(100),
+                'R_num': random.randint(1, 100),
+                'min_no': 0,
+                'max_no': 0, 
+                'count': 0}
 
     # provide other required implementation here
-    pass
+    return messages
 
 def add(seq: int, msg: str, alienList: dict):
     """
@@ -25,7 +30,21 @@ def add(seq: int, msg: str, alienList: dict):
     """
 
     # provide implementation here
-    pass
+    # print(alienList)
+    if alienList['count'] == 0:
+        listadt.insert_first(msg,alienList['messages'])
+        alienList['min_no'] = seq
+        alienList['max_no']  = seq
+        alienList['count'] += 1
+    else:
+        if seq > alienList['max_no']:
+            alienList['max_no'] = seq
+            alienList['R_num'] += 1
+            listadt.insert_first(msg,alienList['messages'])
+        elif seq < alienList['min_no']:
+            alienList['min_no'] = seq
+            alienList['R_num']  -= 1
+            listadt.insert_last(msg,alienList['messages'])
 
 def delete(seq: int, msg: str, alienList: dict):
     """
@@ -37,7 +56,7 @@ def delete(seq: int, msg: str, alienList: dict):
     """
 
     # provide implementation here
-    pass
+    listadt.remove_first(alienList['messages'])
 
 def get_messages(alienList: dict) -> list[str]:
     """
@@ -50,7 +69,18 @@ def get_messages(alienList: dict) -> list[str]:
     """
 
     # provide implementation here
-    pass
+    
+    # we need to use the array implementation here just to return a list of all messages,
+    # otherwise we can just return our circular listadt.
+    # still using fixed size array
+
+    n = alienList['messages']['n']
+    result = [None]*n
+    for i in range(n):
+        result[i] = listadt.get_last(alienList['messages'])
+        listadt.remove_last(alienList['messages'])
+
+    return result
 
 
 def main(filename) -> list[str]:
@@ -73,9 +103,25 @@ def main(filename) -> list[str]:
     """
     
     messages = create_alien()
+    # print(messages['messages'])
+    with open (filename) as f :
+        lines = f.readlines()
 
-    # Provide your implementation here
+    # R_num = random.random()
+    count = 0
 
-    output = get_messages(messages)
-    return(output)
+    for i in lines:
+        line = i.strip().split()
+        seq_no = int(line[0])
+        if seq_no == 0:
+            result = get_messages(messages)
+            break
+        elif seq_no < 0:
+            delete(seq_no,msg,messages)
+        else:
+            msg  = line[1]
+            add(seq_no, msg, messages)
+    
+    return ' '.join(result)
 
+print(main("Inputs/alien02.txt"))
